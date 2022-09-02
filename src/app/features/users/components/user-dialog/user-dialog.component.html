@@ -1,0 +1,82 @@
+<h2 mat-dialog-title>{{ dialogData.data?.name ?? 'Create new user' }}</h2>
+<mat-dialog-content>
+    <form [formGroup]="form">
+        <div class="flex flex-col justify-between">
+            <label for="name" [ngClass]="{ ' text-red-500': controlInvalid('name') }">Name</label>
+            <input
+                [readonly]="isViewOnly()"
+                id="name"
+                formControlName="name"
+                class="w-100 border p-2 rounded"
+                type="text"
+                [ngClass]="{ ' border-red-500': controlInvalid('name') }" />
+        </div>
+        <div class="flex flex-col justify-between my-4">
+            <label for="name" [ngClass]="{ ' text-red-500': controlInvalid('username') }">Username</label>
+            <input
+                [readonly]="isViewOnly()"
+                id="name"
+                formControlName="username"
+                class="w-100 border p-2 rounded"
+                type="text"
+                [ngClass]="{ ' border-red-500': controlInvalid('username') }" />
+        </div>
+        <div class="flex flex-col justify-between">
+            <label for="name" [ngClass]="{ ' text-red-500': controlInvalid('email') }">Email</label>
+            <input
+                [readonly]="isViewOnly()"
+                id="name"
+                formControlName="email"
+                class="w-100 border p-2 rounded"
+                type="email"
+                [ngClass]="{ ' border-red-500': controlInvalid('email') }" />
+        </div>
+        <div class="flex flex-col justify-between my-4" formGroupName="address">
+            <label for="name" [ngClass]="{ ' text-red-500': controlInvalid('city', 'address') }">City</label>
+            <input
+                [readonly]="isViewOnly()"
+                id="name"
+                formControlName="city"
+                class="w-100 border p-2 rounded"
+                type="text"
+                [ngClass]="{ ' border-red-500': controlInvalid('city', 'address') }" />
+        </div>
+        <div class="flex flex-col justify-between">
+            <label for="name" [ngClass]="{ ' text-red-500': controlInvalid('phone') }">Phone</label>
+            <input
+                [readonly]="isViewOnly()"
+                id="name"
+                formControlName="phone"
+                class="w-100 border p-2 rounded"
+                type="text"
+                [ngClass]="{ ' border-red-500': controlInvalid('phone') }" />
+        </div>
+
+        <div class="flex flex-col justify-between my-4" formGroupName="company">
+            <label for="name" [ngClass]="{ ' text-red-500': controlInvalid('name', 'company') }">Company Name</label>
+            <input
+                [readonly]="isViewOnly()"
+                id="name"
+                formControlName="name"
+                class="w-100 border p-2 rounded"
+                type="text"
+                [ngClass]="{ ' border-red-500': controlInvalid('name', 'company') }" />
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions class="flex justify-end">
+    <button
+        class="border px-4 py-1 rounded text-me-blue border-me-blue hover:bg-me-blue hover:bg-opacity-20 cursor-pointer"
+        [ngClass]="{ 'mx-4': !isViewOnly() }"
+        mat-dialog-close>
+        {{ dialogData.actionClose }}
+    </button>
+
+    <button
+        class="border px-4 py-1 rounded text-green-500 border-green-500 hover:bg-green-100 cursor-pointer"
+        *ngIf="!isViewOnly()"
+        [disabled]="form.invalid"
+        (click)="submit()">
+        {{ dialogData.action }}
+    </button>
+</mat-dialog-actions>

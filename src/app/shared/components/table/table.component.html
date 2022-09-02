@@ -1,0 +1,26 @@
+<table class="border border-gray-300 rounded w-100">
+    <tr>
+        <th class="w-40 font-thin h-8 text-lg" *ngFor="let head of headings; let first = first">
+            <ng-container *ngIf="first">
+                <i class="bi bi-sort-alpha-up" (click)="sortBy(head.name, 'asc')"></i>
+                <i class="bi bi-sort-alpha-down-alt mx-2" (click)="sortBy(head.name, 'desc')"></i>
+            </ng-container>
+
+            {{ head.text }}
+        </th>
+        <th class="w-40 font-thin">Actions</th>
+    </tr>
+    <tr
+        class="text-center text-baseline w-40 h-24"
+        *ngFor="let item of items; let i = index"
+        [ngClass]="{ 'bg-gray-50': i % 2 != 0 }">
+        <td *ngFor="let h of headings" class="px-2">
+            {{ h.child ? item[h.name][h.child] : item[h.name] }}
+        </td>
+        <td class="w-40 flex h-24 justify-around items-center">
+            <i class="bi bi-eye" (click)="action('view', item)"></i>
+            <i class="bi bi-pencil" (click)="action('edit', item)"></i>
+            <i class="bi bi-trash-fill" (click)="action('delete', item)"></i>
+        </td>
+    </tr>
+</table>
